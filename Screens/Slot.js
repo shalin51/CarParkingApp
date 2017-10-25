@@ -8,7 +8,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 import  Icon  from 'react-native-vector-icons/FontAwesome'
-export default class HomeScreen extends Component{
+export default class SlotScreen extends Component{
     constructor(props){
         super(props)
 

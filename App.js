@@ -20,7 +20,9 @@ import ForgotPassScreen from './Screens/Authentication/forgotPass';
 import SignUpScreen from './Screens/Authentication/signup';
 import LoginScreen from './Screens/Authentication/login';
 import  Icon  from 'react-native-vector-icons/FontAwesome'
-import CustomDrawerContentComponent from './Screens/shared/CustomDrawerContentComponent';
+import DrawerContent from './Screens/shared/CustomDrawerContentComponent';
+import SlotScreen from './Screens/Slot';
+
 
 const styles = StyleSheet.create({
   icon: {
@@ -30,15 +32,6 @@ const styles = StyleSheet.create({
 });
 
 const deviceWidth = Dimensions.get('window').width
-
-const DrawerContent = (props) => (
-  <ScrollView>
-    <Text>Test</Text>
-    <Button title="Test" / >
-    <DrawerItems {...props} />
-  </ScrollView>)
-
-
 
  const AppDrawer =DrawerNavigator(
     {
@@ -50,7 +43,7 @@ const DrawerContent = (props) => (
           drawerLabel: 'Home',
           drawerIcon: 
           <Image
-          source={'https://cdn2.iconfinder.com/data/icons/snipicons/5000/home-128.png'}
+          source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'}}
           style={styles.icon}
         />
            
@@ -81,7 +74,7 @@ const DrawerContent = (props) => (
               <Icon name='' size={25} />
               )})
         },
-      History:{
+      Histories:{
         path:'/',
         screen:HistoryScreen,
         navigationOptions: {
@@ -91,7 +84,11 @@ const DrawerContent = (props) => (
             <Icon name='' size={25} />
             )
       }
-      }, 
+      },
+      Slot:{
+        screen:SlotScreen,
+      }
+      , 
       Logout:{
         path:'/',
         screen:LogoutScreen,
@@ -122,32 +119,28 @@ const DrawerContent = (props) => (
  );
  
  const LoginStack = StackNavigator({
-  loginScreen:{screen : LoginScreen },
-  signUpScreen:{screen:  SignUpScreen},
-  ForgotPassScreen: { 
+  login:{screen : LoginScreen },
+  signUp:{screen:  SignUpScreen},
+  ForgotPass: { 
   screen: ForgotPassScreen},
 }, {
   headerMode: 'none',
-  navigationOptions: {
+  navigationOptions: ({ navigation }) => ({
     headerStyle: {backgroundColor: '#E73536'},
-    title: 'You are not logged in',
+title: 'Welcome to Spot',
     headerTintColor: 'white'
-  }
+})
 })
 
  const AppStack=StackNavigator({   
-      LoginStack:{
-        screen:LoginStack
-      }  ,
+      // LoginStack:{
+      //   screen:LoginStack
+      // },
       DrawerStack: {
         screen : AppDrawer
       }
     },{
-        headerMode: 'none',
-        navigationOptions: ({ navigation }) => ({
-          headerLeft: <Text onPress={() => 
-            navigation.navigate('DrawerOpen')}>Menu</Text>
-      })
+        headerMode: 'screen'
     }
 )
 

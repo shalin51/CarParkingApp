@@ -5,10 +5,11 @@ import {
   Button,
   Text,
   Image,
-  DrawerItems,
-
+  ScrollView,
+  Avatar,
+  TouchableHighlight,
 } from 'react-native';
-
+import {DrawerItems} from 'react-navigation';
 
 const styles = StyleSheet.create({
     container: {
@@ -16,16 +17,25 @@ const styles = StyleSheet.create({
     },
   });
 
-export default class CustomDrawerContentComponent extends Component{
-constructor(props){
-    super(props)
-}
+  onOkPress=function(){  
+                Alert.alert(
+                'Ok Pressed',
+                'Are you sure?')
+                navigate('login')
+        }.bind(this);
 
-    render(){
-        return(
-            <View style={styles.container}>
-                <DrawerItems {...this.props} />
-            </View>
-        )
-    }
-}
+  _onPressButton=function(){
+    console.log('called')
+  }
+export default DrawerContent = (props) => (
+    <View>
+      <TouchableHighlight onPress={this._onPressButton}>
+      <Image
+          source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'}}
+          style={{height:200}}
+          on
+        />
+    </TouchableHighlight>
+    <DrawerItems {...props} />
+    </View>)
+  
