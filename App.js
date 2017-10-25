@@ -1,108 +1,162 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
-  Text,
   View,
   Button,
-  TextInput
+  Text,
+  Image,
+  ScrollView,
+Dimensions,
+
 } from 'react-native';
-import SideMenu  from 'react-native-side-menu';
-
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-export default class App extends Component {
-  render() {
-    let pic = {
-      uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
-    };
-    var menu=<Menu/>
-    return (
-      
-      <SideMenu menu={menu}>
-         <ContentView/>
-      </SideMenu>
-    );
-  }
-}
+import {DrawerNavigator,StackNavigator,DrawerItems} from 'react-navigation';
+import HomeScreen from './Screens/Home';
+import AccountScreen from './Screens/Account';
+import ReportScreen from './Screens/Report';
+import HistoryScreen from './Screens/History';
+import LogoutScreen from './Screens/Logout';
+import ForgotPassScreen from './Screens/Authentication/forgotPass';
+import SignUpScreen from './Screens/Authentication/signup';
+import LoginScreen from './Screens/Authentication/login';
+import  Icon  from 'react-native-vector-icons/FontAwesome'
+import CustomDrawerContentComponent from './Screens/shared/CustomDrawerContentComponent';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
+  icon: {
+    width: 24,
+    height: 24,
   },
-  textBox: {
-    height:40,
-    textAlign: 'center',
-    margin: 10,
-  },
-  myButton:{
-
-    height:40,
-    textAlign: 'center',
-    margin: 10,
-    color:'#0000ff'
-  },
-  topBar:{
-    height:40,
-    margin:2,
-    flexDirection:'row',
-    backgroundColor:'#ffff33'
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  sideBarContainer:{
-    flex:1,
-    flexDirection:'column'
-  },
-  sideBarText:{
-    height:80,
-    padding:20,
-    flexDirection:'column'
-  }
 });
 
-class Menu extends React.Component{
-  render(){
-    return(
-        <View style={styles.sideBarContainer}>
-          <View>
-            
-          </View>        
-           <Text style={styles.sideBarText}>Option 1</Text>
-           <Text style={styles.sideBarText}>Option 2</Text>
-           <Text style={styles.sideBarText}>Option 3</Text>
-           <Text style={styles.sideBarText}>Option 4</Text>
-        </View>
-    )
-  }
-}
+const deviceWidth = Dimensions.get('window').width
 
-class ContentView extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-          
-          <TextInput style={styles.textBox} placeholder="Enter user name"></TextInput>
-          <TextInput style={styles.textBox} placeholder="Enter user name"></TextInput>
-          <Button style={styles.myButton} title="Login" ></Button>
-            
-        </View>
-    );
+const DrawerContent = (props) => (
+  <ScrollView>
+    <Text>Test</Text>
+    <Button title="Test" / >
+    <DrawerItems {...props} />
+  </ScrollView>)
+
+
+
+ const AppDrawer =DrawerNavigator(
+    {
+      Home:{
+        path:'/',
+        screen:HomeScreen,
+        navigationOptions: {
+          title:'Home',
+          drawerLabel: 'Home',
+          drawerIcon: 
+          <Image
+          source={'https://cdn2.iconfinder.com/data/icons/snipicons/5000/home-128.png'}
+          style={styles.icon}
+        />
+           
+      }
+    },
+      Account:{
+        path:'/',
+        screen:AccountScreen,
+        navigationOptions: {
+          title:'Account',
+          drawerLabel: 'Account',
+          drawerIcon: () => (
+            <Icon name='sc-telegram'
+            type='evilicon'
+            color='#517fa4' />
+            )
+      }
+      },
+      
+        Report:{
+          path:'/',
+          screen:ReportScreen,
+          navigationOptions: ({ navigation }) => ({
+            title: 'Report',
+            headerLeft: <Icon name='fontawesome|square' size={30}  onPress={() => navigation.navigate('DrawerOpen')} />,                                        
+            drawerLabel: 'Report',
+            drawerIcon: () => (
+              <Icon name='' size={25} />
+              )})
+        },
+      History:{
+        path:'/',
+        screen:HistoryScreen,
+        navigationOptions: {
+          title:'History',
+          drawerLabel: 'History',
+          drawerIcon: () => (
+            <Icon name='' size={25} />
+            )
+      }
+      }, 
+      Logout:{
+        path:'/',
+        screen:LogoutScreen,
+        navigationOptions: {
+          title:'Logout',
+          drawerLabel: 'Logout',
+          drawerIcon: () => (
+            <Icon name='' size={25} />
+            )
+      }
+      }
+    },{
+    initialRouteName:'Home',
+    drawerPosition:'left',
+    headerMode:'screen',
+    drawerWidth:deviceWidth/1.5,
+    contentComponent:props => <DrawerContent {...props} />,
+    drawerLockMode: 'locked-closed',
+    contentOptions: {
+      activeTintColor: '#e9df63',
+      inactiveBackgroundColor:'#546df8',
+      style: {
+        marginVertical: 0,
+      }
+    },
+    drawerBackgroundColor: 'transparent'
+    }
+ );
+ 
+ const LoginStack = StackNavigator({
+  loginScreen:{screen : LoginScreen },
+  signUpScreen:{screen:  SignUpScreen},
+  ForgotPassScreen: { 
+  screen: ForgotPassScreen},
+}, {
+  headerMode: 'none',
+  navigationOptions: {
+    headerStyle: {backgroundColor: '#E73536'},
+    title: 'You are not logged in',
+    headerTintColor: 'white'
   }
-}
+})
+
+ const AppStack=StackNavigator({   
+      LoginStack:{
+        screen:LoginStack
+      }  ,
+      DrawerStack: {
+        screen : AppDrawer
+      }
+    },{
+        headerMode: 'none',
+        navigationOptions: ({ navigation }) => ({
+          headerLeft: <Text onPress={() => 
+            navigation.navigate('DrawerOpen')}>Menu</Text>
+      })
+    }
+)
+
+export default class App extends Component{
+      render(){
+        return(         
+              <AppStack/>         
+        )
+      }
+};
+
+
