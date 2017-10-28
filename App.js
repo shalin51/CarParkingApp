@@ -22,7 +22,7 @@ import LoginScreen from './Screens/Authentication/login';
 import  Icon  from 'react-native-vector-icons/FontAwesome'
 import DrawerContent from './Screens/shared/CustomDrawerContentComponent';
 import SlotScreen from './Screens/Slot';
-
+import WindowScreen from './Screens/WindowScreen'
 
 const styles = StyleSheet.create({
   icon: {
@@ -55,11 +55,7 @@ const deviceWidth = Dimensions.get('window').width
         navigationOptions: {
           title:'Account',
           drawerLabel: 'Account',
-          drawerIcon: () => (
-            <Icon name='sc-telegram'
-            type='evilicon'
-            color='#517fa4' />
-            )
+         
       }
       },
       
@@ -68,11 +64,8 @@ const deviceWidth = Dimensions.get('window').width
           screen:ReportScreen,
           navigationOptions: ({ navigation }) => ({
             title: 'Report',
-            headerLeft: <Icon name='fontawesome|square' size={30}  onPress={() => navigation.navigate('DrawerOpen')} />,                                        
             drawerLabel: 'Report',
-            drawerIcon: () => (
-              <Icon name='' size={25} />
-              )})
+           })
         },
       Histories:{
         path:'/',
@@ -80,30 +73,31 @@ const deviceWidth = Dimensions.get('window').width
         navigationOptions: {
           title:'History',
           drawerLabel: 'History',
-          drawerIcon: () => (
-            <Icon name='' size={25} />
-            )
+         
       }
       },
       Slot:{
         screen:SlotScreen,
-      }
-      , 
+        navigationOptions: (navigation)=>({        
+          title:<Text>Slots</Text>,
+          drawerLabel: 'Slot',
+        }
+        )
+      },
       Logout:{
         path:'/',
         screen:LogoutScreen,
         navigationOptions: {
           title:'Logout',
           drawerLabel: 'Logout',
-          drawerIcon: () => (
-            <Icon name='' size={25} />
-            )
       }
       }
     },{
+        navigationOptions:({ navigation }) => ({
+          headerLeft : <Button onPress={()=>navigation.navigate('DrawerOpen')} title="Menu" />,
+        }),
     initialRouteName:'Home',
     drawerPosition:'left',
-    headerMode:'screen',
     drawerWidth:deviceWidth/1.5,
     contentComponent:props => <DrawerContent {...props} />,
     drawerLockMode: 'locked-closed',
@@ -137,11 +131,12 @@ title: 'Welcome to Spot',
       //   screen:LoginStack
       // },
       DrawerStack: {
-        screen : AppDrawer
-      }
-    },{
-        headerMode: 'screen'
-    }
+        screen : AppDrawer,
+        
+      }},{
+        headerMode:'float',
+    },
+   
 )
 
 export default class App extends Component{

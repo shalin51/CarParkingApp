@@ -13,35 +13,19 @@ import SingleItemView from './views/SingleItem'
 import Window from './views/TransitionView'
 import YourView from './views/TestTran'
 
-export default class SlotScreen extends Component{
+export default class WindowScreen extends Component{
     constructor(props){
         super(props)
-        const {navigate,state} = this.props.navigation
-    
-        this.gotoWindow=function(parent,listView,slotId){
-                    parent.setState({
-                        listView
-                    })    
-        }       
-
-        this.state={
-            listView:true,
-        }
+        const {navigate,state} = this.props.navigation;
+        Alert.alert(
+            state.params.title,
+            state.params.listView
+        )
     }
-
-    render(){        
-        const Slot= ()=>{
-            if(this.state.listView){
-                return <MyListView callSlots={this.gotoWindow} parent={this}  />
-            }
-            else{
-               return <Window callSlots={this.gotoWindow} parent={this}/>
-            }
-        }
-      
+    render(){     
         return( 
             <View>
-               <Slot/>
+               <Window/>
             </View>
         )
     }

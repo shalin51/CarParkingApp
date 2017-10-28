@@ -16,11 +16,7 @@ export default class HomeScreen extends Component{
 
 
     onSlotPress=function(slotId){  
-            Alert.alert(
-                'Slot Selected',
-                slotId,
-            )
-            navigate('Histories')
+         navigate('Slot',{params:{slotId:'D'}})
     }.bind(this);
 
 
