@@ -21,8 +21,7 @@ import SignUpScreen from './Screens/Authentication/signup';
 import LoginScreen from './Screens/Authentication/login';
 import  Icon  from 'react-native-vector-icons/FontAwesome'
 import DrawerContent from './Screens/shared/CustomDrawerContentComponent';
-import SlotScreen from './Screens/Slot';
-import WindowScreen from './Screens/WindowScreen'
+import SlotScreen from './Screens/SlotScreen';
 
 const styles = StyleSheet.create({
   icon: {
@@ -102,13 +101,13 @@ const deviceWidth = Dimensions.get('window').width
     contentComponent:props => <DrawerContent {...props} />,
     drawerLockMode: 'locked-closed',
     contentOptions: {
-      activeTintColor: '#e9df63',
-      inactiveBackgroundColor:'#546df8',
+      activeTintColor: '#fe4365',
       style: {
-        marginVertical: 0,
+        marginVertical: 10,
+        backgroundColor:'#ff5645'
       }
     },
-    drawerBackgroundColor: 'transparent'
+    drawerBackgroundColor: '#c8c8a9'
     }
  );
  

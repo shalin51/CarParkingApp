@@ -47,6 +47,9 @@ const styles = StyleSheet.create({
   },
 });
 
+
+
+
 const images = [
   require('./images/img1.jpg'),
   require('./images/img2.jpg'),
@@ -56,7 +59,49 @@ const images = [
 class Window extends PureComponent {
   constructor(props){
     super(props)
-   
+    
+    this.state={
+      slot:this.props.currentSlot,
+      nextSlotId:this.props.currentSlot.id,
+      totalSlots:this.props.currentSlot.totalSlots,
+
+    }
+  
+   const REQUEST_URL= "https://jsonplaceholder.typicode.com/users/";
+
+
+
+    this._fetchData= function(update) {
+
+
+      this.setState({
+        nextSlotId:this.state.nextSlotId+update},
+         function stateUpdateComplete() {
+              fetch(REQUEST_URL+this.state.nextSlotId)
+              .then((response) => response.json())
+              .then((responseData) => {        
+                this.setState({
+                  slot:responseData
+                });
+                this._transition.show(
+                  <View style={{ flex: 1, alignItems: 'center' }}>
+                    <Button title="Book" onPress={this._bookSlot}/>
+                    <Text>Id</Text>
+                    <Text>{this.state.slot.id}</Text>
+                    <Text>Name</Text>
+                    <Text>{this.state.slot.name}</Text>
+                    <Image source={images[0]} resizeMode="contain" style={styles.imageContainer} />
+                    
+                  </View>,
+                  transitions[transitionIndex]
+                )
+              })
+              .done();  
+            }  
+      )
+        
+    }
+
   }
   _index = 0;
   _timer = null;
@@ -80,20 +125,15 @@ class Window extends PureComponent {
     )
   }
 
-      _next = () => {
+  
+
+    _next = () => {
     this._index = (this._index + 1) % (images.length);
     transitionIndex = (transitionIndex + 1) % transitions.length;
 
+    this._fetchData(1);
+
     // Transition the images with different style one after another
-    this._transition.show(
-      <View style={{ flex: 1, alignItems: 'center' }}>
-        <Text>Price</Text>
-        <Text>{images[this._index]}</Text>
-        <Image source={images[this._index]} resizeMode="contain" style={styles.imageContainer} />
-        
-      </View>,
-      transitions[transitionIndex]
-    )
   }
 
   _gotoListView=()=>{
@@ -104,20 +144,27 @@ class Window extends PureComponent {
   _prev = () => {
     this._index = (this._index + 1) % (images.length);
     transitionIndex = (transitionIndex + 1) % transitions.length;
-
-    // Transition the images with different style one after another
-    this._transition.show(
-      <View style={{ flex: 1, alignItems: 'center' }}>
-        <Text>Price</Text>
-        <Text>{images[this._index]}</Text>
-        <Image source={images[this._index]} resizeMode="contain" style={styles.imageContainer} />
-        
-      </View>,
-      transitions[transitionIndex]
-    )
+    this._fetchData(-1);
+   
   }
 
   render() {
+    
+    const PrevButton= () =>{   
+      if(this.state.nextSlotId>1){
+        return <Button title='Prev' onPress={this._prev}/>
+      }  
+      else
+      return null; 
+  };
+    const NextButton= () =>{
+    if(this.state.totalSlots>this.state.nextSlotId){
+      return <Button title='Next' onPress={this._next}/>
+    }
+    else
+    return null;
+  }
+   
     return (
         // <Transition easing={Easing.elastic(1)} duration={800} ref={(node) => { this._transition = node; }}>     
         //          <Image source={images[0]} resizeMode="contain" style={styles.imageContainer} />
@@ -129,14 +176,17 @@ class Window extends PureComponent {
           <Transition easing={Easing.elastic(1)} duration={800} ref={(node) => { this._transition = node; }}>
              <View>
              <Button title="Book" onPress={this._bookSlot}/>
-             <Text>Price</Text>
-              <Text>{images[this._index]}</Text>
+             <Text>Id</Text>
+              <Text>{this.state.slot.id}</Text>
+             <Text>Name</Text>
+              <Text>{this.state.slot.name}</Text>
              <Image source={images[0]} resizeMode="contain" style={styles.imageContainer} />
              </View>
                
           </Transition>
-        <Button title='Prev' onPress={this._prev}/>
-        <Button title='Next' onPress={this._next}/>
+          <PrevButton/>
+       <NextButton/>
+        
     </View>
     )
   }

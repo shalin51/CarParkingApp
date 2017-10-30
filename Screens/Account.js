@@ -3,22 +3,33 @@ import {
   StyleSheet,
   Text,
   Button,
-  View
+  View,
+  TextInput,
+Alert,
+
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 export default class AccountScreen extends Component{
     constructor(props){
         super(props)
         this.props.navigation.navigate('Account')
-        
+        this.onUpdatePressed=function(){
+            Alert.alert(
+                'Are you sure to want to update?'
+            )
+        }.bind(this);
     }
 
     render(){
         return( <View>
-            <Text>Home Screen</Text>
-            <Button title='Account' onPress={()=>this.props.navigation.navigate('DrawerOpen')}/> 
-        </View>)
-       
+           <Text>Password:</Text>
+           <TextInput placeholder="Password"></TextInput>
+           <Text>Confirm Password:</Text>
+           <TextInput placeholder="Confirm Password"></TextInput>
+           <Text>Email:</Text>
+           <TextInput placeholder="Email"></TextInput>
+           <Button title="Update" onPress={this.onUpdatePressed}/>
+        </View>)       
     }
     
 }
