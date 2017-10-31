@@ -42,7 +42,7 @@ const deviceWidth = Dimensions.get('window').width
           drawerLabel: 'Home',
           drawerIcon: 
           <Image
-          source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'}}
+          source={require('./Screens/views/images/homeLogo.png')}
           style={styles.icon}
         />
            
@@ -54,7 +54,10 @@ const deviceWidth = Dimensions.get('window').width
         navigationOptions: {
           title:'Account',
           drawerLabel: 'Account',
-         
+          drawerIcon: 
+          <Image
+          source={require('./Screens/views/images/accountLogo.png')}
+          style={styles.icon}/>
       }
       },
       
@@ -64,24 +67,32 @@ const deviceWidth = Dimensions.get('window').width
           navigationOptions: ({ navigation }) => ({
             title: 'Report',
             drawerLabel: 'Report',
+            drawerIcon:()=> <Image
+            source={require('./Screens/views/images/reportLogo.png')}
+            style={styles.icon}/>
            })
         },
       Histories:{
         path:'/',
         screen:HistoryScreen,
-        navigationOptions: {
+        navigationOptions:({ navigation }) => ({
           title:'History',
           drawerLabel: 'History',
-         
-      }
+          drawerIcon:()=> <Image
+          source={require('./Screens/views/images/historyLogo.png')}
+          style={styles.icon}/>
+         })
       },
       Slot:{
-        screen:SlotScreen,
+        screen:(props) =><SlotScreen {...props} listView={true} />,
         navigationOptions: (navigation)=>({        
           title:<Text>Slots</Text>,
           drawerLabel: 'Slot',
-        }
-        )
+          drawerIcon:()=> <Image
+          source={require('./Screens/views/images/slotLogo.png')}
+          style={styles.icon}/>
+         })
+        
       },
       Logout:{
         path:'/',
@@ -89,6 +100,9 @@ const deviceWidth = Dimensions.get('window').width
         navigationOptions: {
           title:'Logout',
           drawerLabel: 'Logout',
+          drawerIcon:()=> <Image
+          source={require('./Screens/views/images/logoutLogo.png')}
+          style={styles.icon}/>
       }
       }
     },{
@@ -101,10 +115,10 @@ const deviceWidth = Dimensions.get('window').width
     contentComponent:props => <DrawerContent {...props} />,
     drawerLockMode: 'locked-closed',
     contentOptions: {
-      activeTintColor: '#fe4365',
+      activeTintColor: '#f4b157',
       style: {
         marginVertical: 10,
-        backgroundColor:'#ff5645'
+        backgroundColor:'#FAEBD7'
       }
     },
     drawerBackgroundColor: '#c8c8a9'
@@ -120,7 +134,7 @@ const deviceWidth = Dimensions.get('window').width
   headerMode: 'none',
   navigationOptions: ({ navigation }) => ({
     headerStyle: {backgroundColor: '#E73536'},
-title: 'Welcome to Spot',
+    title: 'Welcome to Spot',
     headerTintColor: 'white'
 })
 })

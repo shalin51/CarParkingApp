@@ -1,5 +1,5 @@
 import React, { PureComponent,Dimention } from 'react';
-import { View, StyleSheet, Image, Text,Animated, Easing,Button,Alert,Card } from 'react-native';
+import { View, StyleSheet, Image, Text,Animated, Easing,Button,Alert,Dimensions } from 'react-native';
 
 import {
   createTransition,
@@ -21,34 +21,8 @@ const transitionIndex = 0;
 // Create Transition component
 const Transition = createTransition();
 
-const WIDTH = 300;
-const HEIGHT = 500;
-
-const styles = StyleSheet.create({
-  imageContainer: {
-    width: WIDTH,
-    height: HEIGHT,
-  },
-  button:{
-    padding: 20,
-    margin: 10,
-    width:20,
-    height:30
-  },
-  container: {
-    padding: 20,
-    margin: 10,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: 'black',
-    width: WIDTH + 42,
-    height: HEIGHT + 42,
-    backgroundColor: 'transparent',
-  },
-});
-
-
-
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 
 const images = [
   require('./images/img1.jpg'),
@@ -56,7 +30,7 @@ const images = [
   require('./images/img3.jpg'),
 ];
 
-class Window extends PureComponent {
+export default class Window extends PureComponent {
   constructor(props){
     super(props)
     
@@ -89,9 +63,7 @@ class Window extends PureComponent {
                     <Text>Id</Text>
                     <Text>{this.state.slot.id}</Text>
                     <Text>Name</Text>
-                    <Text>{this.state.slot.name}</Text>
-                    <Image source={images[0]} resizeMode="contain" style={styles.imageContainer} />
-                    
+                    <Text>{this.state.slot.name}</Text>       
                   </View>,
                   transitions[transitionIndex]
                 )
@@ -172,24 +144,41 @@ class Window extends PureComponent {
         //         <Button title='Next Image' onPress={this._change}/>                             
         // </Transition> 
         <View style={styles.container}>
-            <Button title='List' onPress={this._gotoListView}/>
-          <Transition easing={Easing.elastic(1)} duration={800} ref={(node) => { this._transition = node; }}>
-             <View>
-             <Button title="Book" onPress={this._bookSlot}/>
-             <Text>Id</Text>
+            <Button title='List' onPress={this._gotoListView} style={styles.container}/>
+            <Transition  easing={Easing.elastic(1)} duration={800} ref={(node) => { this._transition = node; }}>
+              <View>
+              <Button title="Book" onPress={this._bookSlot}/>
+              <Text>Id</Text>
               <Text>{this.state.slot.id}</Text>
-             <Text>Name</Text>
-              <Text>{this.state.slot.name}</Text>
-             <Image source={images[0]} resizeMode="contain" style={styles.imageContainer} />
-             </View>
-               
-          </Transition>
-          <PrevButton/>
-       <NextButton/>
-        
-    </View>
+              <Text>Name</Text>
+                <Text>{this.state.slot.name}</Text>
+             
+              </View>
+                
+            </Transition>
+            <View>
+              <PrevButton/>
+              <NextButton/>
+            </View>
+        </View>
     )
   }
 }
 
-export default Window;
+const styles = StyleSheet.create({
+  trnsitioner:{
+    
+  },
+  container: {
+   
+    padding: 20,
+    margin: 10,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: 'black',
+    backgroundColor: 'transparent',
+    width:WIDTH/1.25,
+    height:HEIGHT/1.25,
+   
+  },
+});

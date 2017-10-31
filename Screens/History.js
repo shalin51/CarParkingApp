@@ -31,6 +31,7 @@ export default class HistoryScreen extends Component {
             <Text>click</Text>
         </TouchableOpacity>
         <Load showBtn={true} ref="Load"></Load>
+       
       </View>
     );
   }

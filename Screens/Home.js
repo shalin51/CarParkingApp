@@ -22,17 +22,17 @@ export default class HomeScreen extends Component{
             booked:true
         }
 
-    onSlotPress=function(slotId){  
-         navigate('Slot',{params:{slotId:'D'}})
+    this.onSlotPress=function(slotId){  
+         navigate('Slot',{listView:false,slot})
     }.bind(this);
 
-
+   
     }
     render(){
 
         let YourBookedSlot=()=>{
             if(this.state.booked)
-                return <BookedSlot style={styles.BookedslotContainer}/>
+                return <BookedSlot slot={slot} style={styles.BookedslotContainer}  />
             else
                 return null
         }
@@ -41,8 +41,13 @@ export default class HomeScreen extends Component{
         return( 
         <View style={styles.container}>
             <ParentSlotsView style={styles.parentSlotContainer} navigation={this.props.navigation} />
-            <YourBookedSlot style={styles.BookedslotContainer}/>
-        </View>)
+            <TouchableHighlight style={styles.BookedslotContainer}onPress={this.onSlotPress}>
+                <View>
+                  <YourBookedSlot />
+                </View>
+            </TouchableHighlight>   
+        </View>
+        )
        
     }
 }
@@ -67,3 +72,25 @@ const styles = StyleSheet.create({
     },
   })
   
+  const slot={
+    id:1,
+    number:12,
+    parentSlot:'D',
+    price:'12$',
+    location:{
+        lon:'+5142',
+        let:'+66512',
+    },
+    distance:'0.25mi',
+    avilability:{
+        booked:0,
+        bookedTimeStamp:{
+            time:'01:30:14',
+            date:'02/03/2017',
+        },
+        availabilityTimeStamp:{
+            time:'09:30:00',
+            date:'02/03/2017',
+        }
+    }
+}

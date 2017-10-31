@@ -15,23 +15,37 @@ export default class SlotScreen extends Component{
     constructor(props){
         super(props)
         const {navigate,state} = this.props.navigation
-    
-        this.gotoWindow=function(parent,listView,slot){
         
-           
-                    parent.setState({
-                        listView,
-                        slot,
-                    })    
-
-                
-        }       
-
         this.state={
             listView:true,
             slot:null,
         }
+        
+        this.gotoWindow=function(parent,listView,slot){          
+                    parent.setState({
+                        listView,
+                        slot,
+                    })                  
+        }       
+        this.componentDidMount=function(){
+            
+                // if(typeof(state.params)!='undefined'){
+                //     this.setState({
+                //         listView:state.params.listView,
+                //         slot:state.params.slot
+                //     })
+                // }
+                // else{
+                //         this.setState({
+                //             listView:true,
+                //             slot:null
+                //         })
+                //     }
+                  }
+
     }
+    
+   
 
     render(){        
         const Slot= ()=>{
@@ -44,7 +58,7 @@ export default class SlotScreen extends Component{
         }
       
         return( 
-            <View>
+            <View style={styles.container}>
                <Slot/>
             </View>
         )
@@ -53,17 +67,7 @@ export default class SlotScreen extends Component{
 
 const styles = StyleSheet.create({
     container: {
-      paddingTop: 60,
-      alignItems: 'center'
+     flex:1
     },
-    button: {
-      marginBottom: 30,
-      width: 260,
-      alignItems: 'center',
-      backgroundColor: '#2196F3'
-    },
-    buttonText: {
-      padding: 20,
-      color: 'white'
-    }
+
   })
