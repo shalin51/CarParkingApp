@@ -15,23 +15,13 @@ export default class LoginScreen extends Component{
         const {navigate} = this.props.navigation
         this.state={userName:"username value is here"};
         this.onLoginPress=function(){
-            Alert.alert(
-                'From UserName',
-                this.state.userName,              
-            )
             navigate('Home');
         }.bind(this);
         this.onRegisterPress=function(){
-            Alert.alert(
-                'From Register',
-                this.state.userName,              
-            )
+           
         }.bind(this);
         this.onForgotPassPress=function(){
-            Alert.alert(
-                'From Forgot',
-                this.state.userName,              
-            )
+           
         }.bind(this);
     }
     render(){

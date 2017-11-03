@@ -9,6 +9,8 @@ import {
   ScrollView,
 Dimensions,
 
+
+
 } from 'react-native';
 import {DrawerNavigator,StackNavigator,DrawerItems} from 'react-navigation';
 import HomeScreen from './Screens/Home';
@@ -82,6 +84,7 @@ const deviceWidth = Dimensions.get('window').width
           source={require('./Screens/views/images/historyLogo.png')}
           style={styles.icon}/>
          })
+         
       },
       Slot:{
         screen:(props) =><SlotScreen {...props} listView={true} />,
@@ -115,13 +118,14 @@ const deviceWidth = Dimensions.get('window').width
     contentComponent:props => <DrawerContent {...props} />,
     drawerLockMode: 'locked-closed',
     contentOptions: {
-      activeTintColor: '#f4b157',
+      activeTintColor: 'white',
+      
       style: {
         marginVertical: 10,
-        backgroundColor:'#FAEBD7'
+        backgroundColor:'#00cccc'
       }
     },
-    drawerBackgroundColor: '#c8c8a9'
+    drawerBackgroundColor: '#00cccc'
     }
  );
  
@@ -133,10 +137,12 @@ const deviceWidth = Dimensions.get('window').width
 }, {
   headerMode: 'none',
   navigationOptions: ({ navigation }) => ({
-    headerStyle: {backgroundColor: '#E73536'},
+    headerStyle: {backgroundColor: '#00cccc'},
     title: 'Welcome to Spot',
     headerTintColor: 'white'
+    
 })
+
 })
 
  const AppStack=StackNavigator({   
@@ -149,6 +155,7 @@ const deviceWidth = Dimensions.get('window').width
       }},{
         headerMode:'float',
     },
+  
    
 )
 
@@ -158,6 +165,7 @@ export default class App extends Component{
               <AppStack/>         
         )
       }
+      
 };
 
 

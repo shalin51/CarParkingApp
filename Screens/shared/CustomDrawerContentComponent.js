@@ -18,9 +18,12 @@ const styles = StyleSheet.create({
       flex: 1,
     },
     text:{
-      color:"#32CD32",
-      backgroundColor:"#ff5234",
+      marginTop:5,
+      color:"white",
+      fontFamily: 'sans-serif-medium',
       alignItems:'flex-end',
+      alignSelf:'center',
+      fontWeight: 'bold'
     },
     img:{
       height:WIDTH/1.7,

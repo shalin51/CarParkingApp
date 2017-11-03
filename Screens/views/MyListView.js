@@ -266,9 +266,10 @@ const styles=StyleSheet.create({
     flexDirection:'row',
     height:40,
     margin:5,
+    backgroundColor:'#008080',
+    borderRadius: 8,
     justifyContent:'space-between',
-    alignItems:'center',
-    backgroundColor:'#54fd31'
+    alignItems:'center'
   },
   slotNumber:{
     flex:1,
@@ -287,10 +288,11 @@ const styles=StyleSheet.create({
   },
   button:{
     margin:2,
-    color:"#bf1996",
+    color:"white",
     borderWidth:1,
     borderColor:"#ffffff",
-    backgroundColor:"#1ad6d2",
+    borderRadius: 15,
+    backgroundColor:"#e67300",
     padding:3
   },
   listViewContainer:{

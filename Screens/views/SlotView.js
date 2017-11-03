@@ -50,7 +50,8 @@ export default class Slot extends Component{
 const styles=StyleSheet.create({    
     container:{
         flex:1,
-        backgroundColor:"#00ff45",
+        borderRadius: 30,
+        backgroundColor:"#ff9900",
         width: Dimensions.get('window').width/2,
         justifyContent:'space-between'
       },
@@ -71,15 +72,17 @@ const styles=StyleSheet.create({
         flexDirection:'row',
       },
       distance:{
+        marginTop:20,
+        alignItems: 'center',
         flex:1,
         flexDirection:'row',
         alignSelf:'center'
       },
       available:{
-          backgroundColor:"#00ff45",
-          color: "#ffffff",
-          fontFamily: 'lucida grande',
-          fontSize: 20,
-          alignSelf: 'center',        
+        fontFamily: 'sans-serif-condensed',
+        color: "black",
+        fontSize: 20,
+        fontWeight: 'bold',
+        alignSelf: 'center',     
       }
 })

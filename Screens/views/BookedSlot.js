@@ -44,19 +44,17 @@ export default class BookedSlot extends Component{
 
 const styles = StyleSheet.create({
     container: {
-        margin:30,
+        margin:20,
         flex:1,
         flexDirection:'column',
-        borderWidth:1,
-        borderRadius:2,
-        borderColor:'#ff5531'
+       
     },
     slotContainer: {
         margin:10,
         alignItems: 'center',
     },
     buttonContainer: {
-        marginTop:1,
+        marginTop:6,
         alignItems: 'center',
         flexDirection:'row',
         justifyContent:"space-between",

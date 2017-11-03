@@ -55,6 +55,7 @@ const HEIGHT=Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
     container: {
+					backgroundColor:'#ccffff',			  
       paddingTop: 30,
       flex:1,
       alignItems: 'center',
