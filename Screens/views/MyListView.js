@@ -25,8 +25,10 @@ export default class MyListView extends Component{
         const REQUEST_URL="https://jsonplaceholder.typicode.com/users";
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
          
+        const {slots}=this.props
+        
         getTotalSlots=function(){
-          return 10;
+          return slots.length;
         }
 
         this.state = {
@@ -34,6 +36,7 @@ export default class MyListView extends Component{
           listView:true,
           loaded: false,
           totalSlots:getTotalSlots(),
+          txtSearch:" "
         }
          
        
@@ -45,22 +48,136 @@ export default class MyListView extends Component{
       
 
         this.fetchData= function() {
-          fetch(REQUEST_URL)
-            .then((response) => response.json())
-            .then((responseData) => {                       
-              this.setState({
-                dataSource: ds.cloneWithRows(responseData),
-                loaded: true,
-              });
-            })
-            .done();
+          // fetch(REQUEST_URL)
+          //   .then((response) => response.json())
+          //   .then((responseData) => {                       
+          //     this.setState({
+          //       dataSource: ds.cloneWithRows(responseData),
+          //       loaded: true,
+          //     });
+          //   })
+          //   .catch(
+          //     Alert.alert('err')
+          //   );
+
+          this.setState({
+                  dataSource: ds.cloneWithRows(slots),
+                  loaded: true,
+                });
         }
 
+        this.sortList=function(itemValue){
+          this.setState({
+            sortedOption:itemValue
+          })
+          switch(itemValue){
+            case "number":this.sortByNumber()
+            break
+            case "distance":this.sortByDistance()
+            break
+            case "time":this.sortByTime()
+            break
+            case "lPrice":this.sortByLowPrice()
+            break
+            case "hPrice":this.sortByHighPrice()
+            break
+            default:this.sortByLowPrice()
+            break
+          }
+          
+        }.bind(this)
+
+        this.sortByNumber=function(){
+            let tempslots=slots.sort(function (slot1,slot2){
+              if(slot1.number>slot2.number){
+                  return 1
+                }
+                if(slot1.number<slot2.number){
+                  return -1
+                }
+                return 0;
+            })
+            this.setState({
+              dataSource: ds.cloneWithRows(tempslots)            
+            });
+        }
+
+
+        this.sortByDistance=function(){
+          var tempslots=slots.sort(function (slot1,slot2){
+            if(slot1.distance>slot2.distance){
+                return 1
+              }
+              if(slot1.distance<slot2.distance){
+                return -1
+              }
+              return 0;
+          })
+          this.setState({
+            dataSource: ds.cloneWithRows(tempslots)            
+          });
+        }
+
+        this.sortByTime=function(){
+          var tempslots=slots.sort(function (slot1,slot2){
+            if(slot1.time>slot2.time){
+                return 1
+              }
+              if(slot1.distance<slot2.distance){
+                return -1
+              }
+              return 0;
+          })
+          this.setState({
+            dataSource: ds.cloneWithRows(tempslots)            
+          });   
+        }
+
+        this.sortByLowPrice=function(){
+          var tempslots=slots.sort(function (slot1,slot2){
+            if(slot1.price<slot2.price){
+              return -1
+            }
+            if(slot1.price<slot2.price){
+              return 1
+            }
+            return 0;
+        })
+          this.setState({
+            dataSource: ds.cloneWithRows(tempslots),
+          });  
+        }
+
+        this.sortByHighPrice=function(){          
+          var tempslots=slots.sort(function (slot1,slot2){
+            if(slot1.price>slot2.price){
+                return -1
+              }
+              if(slot1.price<slot2.price){
+                return 1
+              }
+              return 0;
+          })
+          this.setState({
+            dataSource: ds.cloneWithRows(tempslots),      
+          });  
+        }
         this.callParent=function(slot){
           slot=Object.assign(slot,{totalSlots:this.state.totalSlots})
             this.props.callSlots(this.props.parent,false,slot);
         }.bind(this);
         
+        this.OnSearch=function(searchText){
+          this.setState({
+            dataSource: ds.cloneWithRows( slots.filter((slot)=>slot.number==parseInt(searchText))  ),
+          });  
+        }
+        this.onSearchTextChanged= function(txt){
+        
+          this.setState({
+            txtSearch:txt ,
+          });  
+        }
         onViewPress=function(){
             navigate('Slot',{title:'test'}
           );
@@ -72,24 +189,28 @@ export default class MyListView extends Component{
               <View style={styles.sortContainer} >
                   <View  style={styles.searchContainer}>
                         <View style={styles.input}>
-                          <TextInput placeholder="Search" />
+                          <TextInput  onChangeText={(txt)=>this.onSearchTextChanged(txt)}  value={this.state.txtSearch} placeholder="Search" />
                         </View>
                         <View style={styles.search}>
-                         <Image source={require('./images/searchLogo.png')} style={styles.search}  />
+                          <TouchableHighlight onPress={()=>this.OnSearch(this.state.txtSearch)}>
+                            <Image source={require('./images/searchLogo.png')} style={styles.search}  
+                            />
+                         </TouchableHighlight>
                         </View>
                   </View>
                     {/* <Image source={require('./images/searchLogo.png')} style={styles.search}  /> */}
                     
                           <View style={styles.pickerContainer}>
                               <Picker 
-                                  selectedValue={this.state.language}
-                                  onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}
+                                  selectedValue={this.state.sortedOption}
+                                  onValueChange={(itemValue, itemIndex) => this.sortList(itemValue)}
                                   mode='dialog'
                                   >
-                                  <Picker.Item label="Number" value="number" />
-                                  <Picker.Item label="Availibility" value="availibility" />
+                                  <Picker.Item label="Low - High" value="lPrice" />
+                                  <Picker.Item label="Hign - Low" value="hPrice" />
                                   <Picker.Item label="Distance" value="distance" />
                                   <Picker.Item label="Time" value="time" />
+                                  <Picker.Item label="Number" value="number"/>
                               </Picker>
                           </View>
               </View>
@@ -98,9 +219,10 @@ export default class MyListView extends Component{
                           dataSource={this.state.dataSource}
                           renderRow={(responseData) =>
                           <View style={styles.row}>
-                            <Text style={styles.slotNumber}>D-10</Text>     
-                            <Text style={styles.price}>{responseData.name}</Text>
-                            <Text  style={styles.avialblity}>{responseData.email}</Text>                   
+                            <Text style={styles.slotNumber}>{responseData.parentSlot}-{responseData.number}</Text>     
+                            <Text style={styles.price}>{responseData.price}</Text>
+                          
+                           <Text style={styles.distance}>{responseData.distance}</Text>
                             <Text  style={styles.button} onPress={()=>this.callParent(responseData)}>View</Text>
                             <Text  style={styles.button} onPress={()=>this.callParent(responseData)}>Book</Text>                
                           </View>       
@@ -145,7 +267,8 @@ const styles=StyleSheet.create({
     height:40,
     margin:5,
     justifyContent:'space-between',
-    alignItems:'center'
+    alignItems:'center',
+    backgroundColor:'#54fd31'
   },
   slotNumber:{
     flex:1,
@@ -159,6 +282,9 @@ const styles=StyleSheet.create({
   buttonContainer:{
     flex:2,
   },
+  distance:{
+    flex:2
+  },
   button:{
     margin:2,
     color:"#bf1996",
@@ -171,3 +297,7 @@ const styles=StyleSheet.create({
     flex:5
   }
 })
+
+
+
+

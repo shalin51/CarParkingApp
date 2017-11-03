@@ -11,36 +11,24 @@ export default class LogoutScreen extends Component{
     constructor(props){
         super(props)
         const {navigate} = this.props.navigation
-this.state={
-    test:'test',
-    nav:navigate,
-}
-        onOkPress=function(){  
-                Alert.alert(
-                'Ok Pressed',
-                'Are you sure?')
-                navigate('login')
-        }.bind(this);
-        onCanclePress=function(){
-            Alert.alert(
-                'Cancle Pressed',
-                'Are you sure?')
-                    }.bind(this);
+        this.state={
+         
+            nav:navigate,
+        }
+
+        Alert.alert(
+            'Logout',
+            'Are you sure to logout?',
+            [
+            {text: 'Cancle', onPress: ()=>this.state.nav('Home')},
+            {text: 'Ok', onPress: ()=> this.state.nav('login')}
+        ])
     }
     render(){
         return(
 
            <View>
-               <Button title='Login' onPress={onOkPress}/>
-               { 
-                   Alert.alert(
-                   'Logout',
-                   this.state.test,
-                   [
-                    {text: 'Ask me later', onPress: ()=> this.state.nav('login')}
-                  ],
-                
-               )}
+              
                
             </View>
             )}

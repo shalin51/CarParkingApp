@@ -5,37 +5,24 @@ import {
   Dimensions,
   StyleSheet,
   Text,
-  TouchableOpacity,
-  View,
-
+  TouchableHighlight,
+  View
 } from 'react-native';
 import Camera from 'react-native-camera';
-import GIFLoader from './views/GIFLoader';
-import Load from "react-native-loading-gif";
 
 export default class HistoryScreen extends Component {
-
-    constructor(props){
-        super(props)
-        this._onPress=()=>{
-            this.refs.Load.OpenLoad();
-        }
-    }
-   
   render() {
     return (
       <View style={styles.container}>
-        <Text>No history found.</Text>
-        <Text>Please come back.</Text>
-        <TouchableOpacity onPress={()=>{this._onPress}}>
-            <Text>click</Text>
-        </TouchableOpacity>
-        <Load showBtn={true} ref="Load"></Load>
-       
+        <Text style={styles.text}>You don't have any hisotry!!!!</Text>
+        <View>
+          <Text style={styles.text}>See you soon</Text>
+        </View>
       </View>
     );
   }
 
+ 
 }
 
 const styles = StyleSheet.create({
@@ -43,17 +30,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  preview: {
+  text: {
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
+  color:"#564fff",
+ 
   },
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    color: '#000',
-    padding: 10,
-    margin: 40
-  }
+
 });
