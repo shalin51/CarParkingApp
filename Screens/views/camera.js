@@ -17,7 +17,7 @@ export default class MyCamera extends Component {
         <Camera
           ref={(cam) => {
             this.camera = cam;
-          }}     
+          }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}>
           <Text style={styles.capture} onPress={this.takePicture.bind(this)}>Report</Text>

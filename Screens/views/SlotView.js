@@ -25,7 +25,7 @@ export default class Slot extends Component{
         return(
             <View style={styles.container}>          
                 <Text style={styles.parentSlot}>{this.props.slot.parentSlot}</Text>          
-                <Text style={styles.available}>{ this.props.slot.avilability.booked==0?"Available":"Booked"}</Text>
+                <Text style={styles.available}>Booked</Text>
                 <View style={styles.priceNameContainer}>
                     <View>
                         <Text>Price</Text>
@@ -41,7 +41,9 @@ export default class Slot extends Component{
                     <Text>Distance:</Text>
                     <Text>{ this.props.slot.distance}</Text>
                 </View>
-                <GMapView/>
+                <View style={{flex:1,}}>
+                    <GMapView/>
+                </View>
             </View>
         )
     }

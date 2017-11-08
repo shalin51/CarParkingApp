@@ -35,9 +35,20 @@ export default class GMapView extends Component {
 
  render() {
    return (
-     <View>
-       <Button onPress={this.handleGetDirections} title="Route" />
+     <View style={styles.route}>
+       <Text  style={{color:"#ffffff", fontSize:15,fontWeight:'bold', alignSelf:"center",}}  onPress={this.handleGetDirections}>Route</Text>
      </View>
    );
  }
 }
+
+const styles=StyleSheet.create({
+  route:{
+  
+    backgroundColor:"#ff9900",
+    height:20,
+   bottom:5,
+    alignSelf:'center',
+   width:Dimensions.get('window').width
+  }
+})

@@ -34,10 +34,12 @@ export default class Window extends PureComponent {
   constructor(props){
     super(props)
     
+  
     this.state={
       slot:this.props.currentSlot,
       nextSlotId:this.props.currentSlot.id,
       totalSlots:this.props.currentSlot.totalSlots,
+      
     }
   
    const REQUEST_URL= "https://jsonplaceholder.typicode.com/users/";
@@ -59,6 +61,7 @@ export default class Window extends PureComponent {
     // }).done().catch((err)=>Alert.alert(err.toString()))
    }
 
+
     this._fetchData= function(update) {
       this.setState({
         nextSlotId:this.state.nextSlotId+update},
@@ -77,7 +80,7 @@ export default class Window extends PureComponent {
                    });
               this._transition.show(
                 <View style={styles.container} listView={this.props.listView} onPress={this.onSlotPressed}>
-                   <Slot slot={this.state.slot}/>
+                   <Slot navigate={this.props.nav.navigate} slot={this.state.slot}/>
                 </View> 
                ) 
             }  
@@ -129,7 +132,10 @@ export default class Window extends PureComponent {
     transitionIndex = (transitionIndex + 1) % transitions.length;
     this._fetchData(-1);
    
+
   }
+
+  
 
   render() {
     
@@ -158,7 +164,7 @@ export default class Window extends PureComponent {
             <Button title='List' onPress={this._gotoListView} style={styles.container}/>
             <Transition  easing={Easing.elastic(1)} duration={800} ref={(node) => { this._transition = node; }}>
                 <View style={styles.container} listView={this.props.listView} onPress={this.onSlotPressed}>
-                  <Slot slot={this.state.slot}/>
+                  <Slot navigate={this.props.nav.navigate}slot={this.state.slot}/>
                 </View>           
             </Transition>
             <View>
@@ -176,20 +182,36 @@ const Slot=(props)=>{
             
             <View style={styles.priceNameContainer}>
                 <View>
-                    <Text>Price</Text>
-                    <Text>{ props.slot.price}</Text>
+                    <Text style={styles.text}>Price</Text>
+                    <Text  style={styles.text}>{ props.slot.price}</Text>
                 </View>
                 <View>
-                    <Text>Number</Text>
-                    <Text>{ props.slot.number}</Text> 
+                    <Text  style={styles.text}>Number</Text>
+                    <Text  style={styles.text}>{ props.slot.number}</Text> 
                 </View>
             </View>   
 
             <View  style={styles.distance}>
-                <Text>Distance:</Text>
-                <Text>{ props.slot.distance}</Text>
+                <Text  style={styles.text}>Distance:</Text>
+                <Text  style={styles.text}>{ props.slot.distance}</Text>
             </View>
-            <GMapView/>
+            <View style={styles.gMap}> 
+              <GMapView />
+            </View>
+            <View> 
+              <Button title="Book" onPress={()=>Alert.alert("Booking",
+                "Are you sure to want to book this slot?",
+                [
+                  {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                  {text: 'OK', onPress: () => {
+                    global.bookedSlot=props.slot
+                   props.navigate('Home')
+                  }
+                  },
+                ]
+                
+                )}/>
+            </View>
           </View>
 }
 
@@ -197,27 +219,37 @@ const styles = StyleSheet.create({
   trnsitioner:{
     
   },
-  container: {
-    padding: 20,
-    margin: 10,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: 'black',
-    backgroundColor: 'transparent',
-    width:WIDTH/1.25,
-    height:HEIGHT/1.25,
+  gMap:{
+      alignItems:'center',
+      justifyContent:'center',
+      // height:Dimensions.get('height').height/2,
+      height:30,
+      backgroundColor:"#ff9900",
   },
+  container: {
+   
+   flex:1,
+  
+   
+  },
+    text:{
+  color:'#ffffff',
+  fontWeight:'800',
+  fontSize:20
+    },
     slotContainer:{
       flex:1,
-      backgroundColor:"#00ff45",
-      width: Dimensions.get('window').width/2,
+      backgroundColor:"#ffc787",
+      width: Dimensions.get('window').width,
       justifyContent:'space-between'
     },
     parentSlot:{
         paddingTop:20,
         paddingRight:20,
-        fontSize:20,
-        alignSelf: 'flex-end',
+        fontSize:40,
+        alignSelf: 'center',
+        fontWeight:'bold',
+        color:"#ffffff"
     },
     priceNameContainer:{
       flex:1,
@@ -225,6 +257,7 @@ const styles = StyleSheet.create({
       justifyContent:'space-between',
       marginLeft:20,
       marginRight:20,
+      
     }, number:{
       flex:1, 
       flexDirection:'row',

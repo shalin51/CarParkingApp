@@ -24,7 +24,7 @@ export default class MyListView extends Component{
     
         const REQUEST_URL="https://jsonplaceholder.typicode.com/users";
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-         
+        
         const {slots}=this.props
         
         getTotalSlots=function(){
@@ -36,7 +36,8 @@ export default class MyListView extends Component{
           listView:true,
           loaded: false,
           totalSlots:getTotalSlots(),
-          txtSearch:" "
+          txtSearch:" ",
+          
         }
          
        
@@ -184,6 +185,9 @@ export default class MyListView extends Component{
         }.bind(this)
     }
     render(){
+      var availabilityColor="#008000"
+      var availability="Available"
+
         return(  
           <View style={styles.container}>
               <View style={styles.sortContainer} >
@@ -218,15 +222,19 @@ export default class MyListView extends Component{
                       <ListView 
                           dataSource={this.state.dataSource}
                           renderRow={(responseData) =>
-                          <View style={styles.row}>
-                            <Text style={styles.slotNumber}>{responseData.parentSlot}-{responseData.number}</Text>     
-                            <Text style={styles.price}>{responseData.price}</Text>
-                          
-                           <Text style={styles.distance}>{responseData.distance}</Text>
-                            <Text  style={styles.button} onPress={()=>this.callParent(responseData)}>View</Text>
-                            <Text  style={styles.button} onPress={()=>this.callParent(responseData)}>Book</Text>                
-                          </View>       
-                          }
+                            
+                                 
+                                  <View style={styles.row}>
+                                    <Text style={styles.slotNumber}>{responseData.parentSlot}-{responseData.number}</Text>     
+                                    <Text style={styles.price}>{responseData.price}</Text>
+                                    <Text style={[styles.avialblity,{color:availabilityColor}]}>{
+                                      availability }</Text> 
+                                  <Text style={styles.distance}>{responseData.distance}</Text>
+                                    <Text  style={styles.button} onPress={()=>this.callParent(responseData)}>View</Text>
+                                    <Text  style={styles.button} onPress={()=>this.callParent(responseData)}>Book</Text>                
+                                  </View>       
+                            
+                        }
                       /> 
                     </View>
           </View>
@@ -239,7 +247,7 @@ const styles=StyleSheet.create({
   container:{
       flex:1,
       justifyContent:'space-between',
-      margin:8
+     
   },
   sortContainer:{
     flex:1,
@@ -262,23 +270,24 @@ const styles=StyleSheet.create({
     marginRight:5
   },
   row:{
-    flex:1,
     flexDirection:'row',
-    height:40,
-    margin:5,
-    backgroundColor:'#008080',
-    borderRadius: 8,
+    height:60,
+    borderTopWidth:1,
+    borderBottomWidth:1,
+    backgroundColor:'#c2b0fa',
     justifyContent:'space-between',
     alignItems:'center'
   },
   slotNumber:{
-    flex:1,
+    flex:2,
+    marginLeft:10
   },
   price:{
     flex:2,
   },
   avialblity:{
-    flex:3,
+    flex:2,
+    
   },
   buttonContainer:{
     flex:2,
@@ -287,13 +296,13 @@ const styles=StyleSheet.create({
     flex:2
   },
   button:{
-    margin:2,
+    margin:5,
     color:"white",
     borderWidth:1,
     borderColor:"#ffffff",
-    borderRadius: 15,
+    borderRadius: 10,
     backgroundColor:"#e67300",
-    padding:3
+    padding:10
   },
   listViewContainer:{
     flex:5

@@ -31,8 +31,8 @@ export default class HomeScreen extends Component{
     render(){
 
         let YourBookedSlot=()=>{
-            if(this.state.booked)
-                return <BookedSlot slot={slot} style={styles.BookedslotContainer}  />
+            if(global.bookedSlot.id)
+                return <BookedSlot slot={global.bookedSlot} style={styles.BookedslotContainer}  />
             else
                 return null
         }

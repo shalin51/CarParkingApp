@@ -26,10 +26,9 @@ export default class LogoutScreen extends Component{
     }
     render(){
         return(
-
            <View>
               
                
-            </View>
+           </View>
             )}
 }
