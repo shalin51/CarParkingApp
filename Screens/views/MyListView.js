@@ -12,7 +12,6 @@ TextInput,
   Image,
   TouchableHighlight
 } from 'react-native';
-import  Icon  from 'react-native-vector-icons/FontAwesome'
 export default class MyListView extends Component{
 
 

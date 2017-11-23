@@ -8,7 +8,7 @@ import {
   ListView,
   TouchableHighlight
 } from 'react-native';
-import  Icon  from 'react-native-vector-icons/FontAwesome'
+
 export default class MyListView extends Component{
     constructor(props){
         super(props)
@@ -24,8 +24,8 @@ export default class MyListView extends Component{
         }.bind(this);
         
         onViewPress=function(){
-            navigate('Slot',{title:'test'}
-          );
+            navigate('Slot')
+          
         }.bind(this)
     }
     render(){

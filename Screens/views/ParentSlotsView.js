@@ -7,7 +7,7 @@ import {
   View,
   TouchableHighlight
 } from 'react-native';
-import  Icon  from 'react-native-vector-icons/FontAwesome'
+
 import ParentSlot from './ParentComponents/ParentSlot'
 
 export default class ParentSlotsView extends Component{
@@ -15,10 +15,11 @@ export default class ParentSlotsView extends Component{
         super(props)
 
         const {navigate} = this.props.navigation
-
+        const {parent}=this.props
 
     onSlotPress=function(slotId){  
-         navigate('Slot')
+        // navigate('Slot')
+      parent.onParentPressed(parent);
     }.bind(this);
 
 

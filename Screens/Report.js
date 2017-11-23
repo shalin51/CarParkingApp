@@ -6,7 +6,6 @@ import {
   View,
   Alert
 } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import MyCamera from './views/camera';
 
 export default class ReportScreen extends Component{
@@ -30,15 +29,7 @@ export default class ReportScreen extends Component{
         
     }
 
-    static navigationOption={
-        tabBarLable:'Report',
-        drawerIcon:(tintColor)=>{
-            return(
-                <MaterialIcons name="" size={24} style={{color:tintColor}}
-                />
-            );
-        }
-    }
+   
     render(){
         const CameraButton=()=>{
             if(this.state.component=="Button")

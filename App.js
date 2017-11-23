@@ -21,7 +21,6 @@ import LogoutScreen from './Screens/Logout';
 import ForgotPassScreen from './Screens/Authentication/forgotPass';
 import SignUpScreen from './Screens/Authentication/signup';
 import LoginScreen from './Screens/Authentication/login';
-import  Icon  from 'react-native-vector-icons/FontAwesome'
 import DrawerContent from './Screens/shared/CustomDrawerContentComponent';
 import SlotScreen from './Screens/SlotScreen';
 
@@ -196,9 +195,9 @@ global.slots=[{
   parentSlot:'D',
   price:'12$',
   location:{
-    lon:'+5142',
-    let:'+66512',
-  },
+    latitude: 39.107898,
+    longitude: -94.86,
+   },
   distance:'0.25mi',
   booked:1,
   avilability:{
@@ -218,9 +217,9 @@ global.slots=[{
   parentSlot:'D',
   price:'15$',
   location:{
-      lon:'+5142',
-      let:'+66512',
-  },
+    latitude: 39.107898,
+    longitude: -94.86,
+   },
   distance:'0.24mi',
   booked:0,
   avilability:{
@@ -238,9 +237,9 @@ number:42,
 parentSlot:'D',
 price:'12$',
 location:{
-    lon:'+5142',
-    let:'+66512',
-},
+    latitude:39.107898,
+    longitude: -94.845,
+   },
 distance:'0.25mi',
 booked:1,
 avilability:{
@@ -260,9 +259,9 @@ number:110,
 parentSlot:'D',
 price:'17$',
 location:{
-    lon:'+5142',
-    let:'+66512',
-},
+    latitude: 39.107898,
+    longitude: -94.850645,
+   },
 distance:'0.20mi',
 booked:1,
 avilability:{
@@ -282,9 +281,9 @@ number:12,
 parentSlot:'D',
 price:'22$',
 location:{
-    lon:'+5142',
-    let:'+66512',
-},
+    latitude: 39.107898,
+    longitude: -94.79435,
+   },
 distance:'0.15mi',
 booked:0,
 avilability:{
@@ -302,9 +301,9 @@ number:6,
 parentSlot:'E',
 price:'13$',
 location:{
-    lon:'+5142',
-    let:'+66512',
-},
+    latitude: 39.107898,
+    longitude: -94.761545,
+   },
 distance:'0.35mi',
 booked:0,
 avilability:{
@@ -322,9 +321,9 @@ number:12,
 parentSlot:'D',
 price:'12$',
 location:{
-    lon:'+5142',
-    let:'+66512',
-},
+    latitude: 39.107898,
+    longitude: -94.760545,
+   },
 distance:'0.25mi',
 booked:0,
 avilability:{
@@ -344,9 +343,9 @@ number:12,
 parentSlot:'D',
 price:'12$',
 location:{
-    lon:'+5142',
-    let:'+66512',
-},
+    latitude: 39.107898,
+    longitude: -94.781545,
+   },
 distance:'0.25mi',
 booked:0,
 avilability:{
@@ -366,9 +365,9 @@ number:12,
 parentSlot:'D',
 price:'12$',
 location:{
-    lon:'+5142',
-    let:'+66512',
-},
+    latitude: 39.107898,
+    longitude: -94.780545,
+   },
 distance:'0.25mi',
 booked:1,
 avilability:{
@@ -388,9 +387,9 @@ number:10,
 parentSlot:'E',
 price:'12$',
 location:{
-    lon:'+5142',
-    let:'+66512',
-},
+    latitude: 39.107898,
+    longitude: -94.790545,
+   },
 distance:'0.35mi',
 booked:0,
 avilability:{
@@ -408,9 +407,9 @@ number:11,
 parentSlot:'E',
 price:'12$',
 location:{
-    lon:'+5142',
-    let:'+66512',
-},
+    latitude: 39.107898,
+    longitude: -94.840645,        
+   },
 distance:'0.35mi',
 booked:0,
 avilability:{
@@ -428,9 +427,9 @@ number:12,
 parentSlot:'E',
 price:'12$',
 location:{
-    lon:'+5142',
-    let:'+66512',
-},
+    latitude: 39.107898,
+    longitude: -94.80545,
+   },
 distance:'0.35mi',
 booked:0,
 avilability:{

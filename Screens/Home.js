@@ -8,10 +8,9 @@ import {
   View,
   TouchableHighlight
 } from 'react-native';
-import  Icon  from 'react-native-vector-icons/FontAwesome'
 import BookedSlot from './views/BookedSlot'
 import ParentSlotsView from './views/ParentSlotsView'
-
+import Map from './views/Maps'
 
 export default class HomeScreen extends Component{
     constructor(props){
@@ -19,17 +18,46 @@ export default class HomeScreen extends Component{
 
         const {navigate} = this.props.navigation
         this.state={
-            booked:true
+            booked:true,
+            mapView:false
+
         }
 
     this.onSlotPress=function(slotId){  
-         navigate('Slot',{listView:false,slot})
+         navigate('Slot',{
+             listView:true,
+             slot})
     }.bind(this);
-
    
+    this.onParentPressed=function(parent){
+        parent.setState({
+           mapView:true
+       })
+    }
     }
     render(){
-
+    let HomeComponent=()=>{
+        if(!this.state.mapView){
+            return (
+                <View style={styles.container}>
+                  
+                   <ParentSlotsView  parent={this} style={styles.parentSlotContainer} onPress={this.onParentPressed} navigation={this.props.navigation} />           
+                 
+                    <TouchableHighlight style={styles.BookedslotContainer}onPress={this.onSlotPress}>
+                        <View>
+                            <YourBookedSlot />             
+                        </View>
+                    </TouchableHighlight>
+            </View>)
+        }
+        else{
+            return( 
+            <View style={styles.container}>
+                <Map navigation={this.props.navigation}/>
+            </View>)
+        }
+       
+    }
         let YourBookedSlot=()=>{
             if(global.bookedSlot.id)
                 return <BookedSlot slot={global.bookedSlot} style={styles.BookedslotContainer}  />
@@ -39,14 +67,11 @@ export default class HomeScreen extends Component{
 
 
         return( 
-        <View style={styles.container}>
-            <ParentSlotsView style={styles.parentSlotContainer} navigation={this.props.navigation} />
-            <TouchableHighlight style={styles.BookedslotContainer}onPress={this.onSlotPress}>
-                <View>
-                  <YourBookedSlot />
-                </View>
-            </TouchableHighlight>   
-        </View>
+            
+    
+            
+           <HomeComponent/>
+      
         )
        
     }

@@ -17,7 +17,8 @@ export default class HistoryScreen extends Component {
           <Text style={styles.text}>You don't have any hisotry!!!!</Text>
         <View>
           <Text style={styles.text}>See you soon</Text>
-        </View>         
+        </View>     
+       
       </View>
     );
   }

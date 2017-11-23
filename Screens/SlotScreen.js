@@ -7,7 +7,6 @@ import {
   View,
   TouchableHighlight
 } from 'react-native';
-import  Icon  from 'react-native-vector-icons/FontAwesome'
 import MyListView from './views/MyListView'
 import Window from './views/TransitionView'
 
@@ -21,14 +20,21 @@ export default class SlotScreen extends Component{
             slot:null,
         }
         
+       
         this.gotoWindow=function(parent,listView,slot){          
                     parent.setState({
                         listView,
                         slot,
                     })                  
         }       
+        
         this.componentDidMount=function(){
-            
+            if(typeof(state.params)!='undefined' && state.params.listView){
+                this.setState({
+                    listView:false,
+                    slot:state.params.slot
+                })
+            }
                 // if(typeof(state.params)!='undefined'){
                 //     this.setState({
                 //         listView:state.params.listView,
@@ -49,7 +55,7 @@ export default class SlotScreen extends Component{
 
     render(){        
         const Slot= ()=>{
-            if(this.state.listView){
+            if(this.state.listView ){
                 return <MyListView slots={slots} callSlots={this.gotoWindow} parent={this}  />
             }
             else{
