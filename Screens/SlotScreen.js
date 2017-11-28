@@ -74,7 +74,7 @@ export default class SlotScreen extends Component{
 const styles = StyleSheet.create({
     container: {
      flex:1,
-     backgroundColor:'#ccffff', 
+     backgroundColor:'#ffffff', 
     },
 
   })

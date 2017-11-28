@@ -29,12 +29,13 @@ export default class HistoryScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
+    backgroundColor:"#ffffff",
+    justifyContent:"center",
+    alignItems:"center",
   },
   text: {
-    flex: 1,
-  color:"#564fff",
- 
+   color:"#ff0000",
+ fontWeight:"bold"
   },
 
 });

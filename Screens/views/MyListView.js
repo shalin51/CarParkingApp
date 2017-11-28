@@ -273,7 +273,7 @@ const styles=StyleSheet.create({
     height:60,
     borderTopWidth:1,
     borderBottomWidth:1,
-    backgroundColor:'#c2b0fa',
+    backgroundColor:'#ffffff',
     justifyContent:'space-between',
     alignItems:'center'
   },
@@ -298,9 +298,9 @@ const styles=StyleSheet.create({
     margin:5,
     color:"white",
     borderWidth:1,
-    borderColor:"#ffffff",
+    borderColor:"#838383",
     borderRadius: 10,
-    backgroundColor:"#e67300",
+    backgroundColor:"#30728E",
     padding:10
   },
   listViewContainer:{

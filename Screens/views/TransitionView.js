@@ -1,5 +1,5 @@
 import React, { PureComponent,Dimention } from 'react';
-import { View, StyleSheet, Image, Text,Animated, Easing,Button,Alert,Dimensions } from 'react-native';
+import { View, StyleSheet, Image, Text,Animated,TouchableHighlight, Easing,Button,Alert,Dimensions } from 'react-native';
 
 import {
   createTransition,
@@ -141,14 +141,20 @@ export default class Window extends PureComponent {
     
     const PrevButton= () =>{   
       if(this.state.nextSlotId>1){
-        return <Button title='Prev' onPress={this._prev}/>
+        return(<TouchableHighlight  style={styles.bottonContainer} onPress={this._prev}>
+                  <Text  style={styles.buttonText} >PREV</Text>
+                </TouchableHighlight>
+      )
       }  
       else
       return null; 
   };
     const NextButton= () =>{
     if(this.state.totalSlots>this.state.nextSlotId){
-      return <Button title='Next' onPress={this._next}/>
+      return(   <TouchableHighlight  style={styles.bottonContainer} onPress={this._next}>
+                    <Text  style={styles.buttonText} >NEXT</Text>
+                </TouchableHighlight>
+    )
     }
     else
     return null;
@@ -161,7 +167,10 @@ export default class Window extends PureComponent {
         //         <Button title='Next Image' onPress={this._change}/>                             
         // </Transition> 
         <View style={styles.container}>
-            <Button title='List' onPress={this._gotoListView} style={styles.container}/>
+            
+            <TouchableHighlight  style={styles.bottonContainer} onPress={this._gotoListView}>
+              <Text  style={styles.buttonText}  >LIST</Text>
+              </TouchableHighlight>
             <Transition  easing={Easing.elastic(1)} duration={800} ref={(node) => { this._transition = node; }}>
                 <View style={styles.container} listView={this.props.listView} onPress={this.onSlotPressed}>
                   <Slot navigate={this.props.nav.navigate}slot={this.state.slot}/>
@@ -199,7 +208,7 @@ const Slot=(props)=>{
               <GMapView />
             </View>
             <View> 
-              <Button title="Book" onPress={()=>Alert.alert("Booking",
+              <TouchableHighlight  style={styles.bottonContainer} onPress={()=>Alert.alert("Booking",
                 "Are you sure to want to book this slot?",
                 [
                   {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
@@ -210,7 +219,10 @@ const Slot=(props)=>{
                   },
                 ]
                 
-                )}/>
+                )}>
+                <Text  style={styles.buttonText} >BOOK</Text>
+              </TouchableHighlight>
+              
             </View>
           </View>
 }
@@ -227,19 +239,17 @@ const styles = StyleSheet.create({
       backgroundColor:"#ff9900",
   },
   container: {
-   
    flex:1,
-  
-   
+
   },
-    text:{
-  color:'#ffffff',
+  text:{
+  color:"#30728E",
   fontWeight:'800',
   fontSize:20
     },
     slotContainer:{
       flex:1,
-      backgroundColor:"#ffc787",
+      backgroundColor:"#ffffff",
       width: Dimensions.get('window').width,
       justifyContent:'space-between'
     },
@@ -273,5 +283,18 @@ const styles = StyleSheet.create({
         fontFamily: 'lucida grande',
         fontSize: 20,
         alignSelf: 'center',        
+    },
+    buttonText:{
+      fontWeight:"bold",
+      color:"#ffffff",
+    },
+    bottonContainer:{
+      width:WIDTH,
+      backgroundColor:"#30728E",     
+      marginTop:1,
+      justifyContent:"center",
+      alignItems:"center",      
+      height:HEIGHT/15
     }
+
 });

@@ -7,11 +7,13 @@ import {
   TextInput,
   ScrollView,
   Dimensions,
+  TouchableHighlight,
 Alert,
 
 } from 'react-native';
 import Slot from './SlotView';
 
+HEIGHT=Dimensions.get('window').height
 export default class BookedSlot extends Component{
     constructor(props){
         super(props)
@@ -34,8 +36,13 @@ export default class BookedSlot extends Component{
             <View style={styles.container} listView={this.props.listView} onPress={this.onSlotPressed}>
                <Slot style={styles.slotContainer} slot={this.props.slot}/>
                <View  style={styles.buttonContainer}>
-                <Button style={styles.button} title="Resell" onPress={this.onResellPressed}/>
-                <Button style={styles.button} title="Update" onPress={this.onUpdatePressed}/>
+                    <TouchableHighlight  style={styles.bottonContainer}>
+                        <Text  style={styles.buttonText} onPress={this.onResellPressed}>RESELL</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight  style={styles.bottonContainer} onPress={this.onUpdatePressed}>
+                        <Text  style={styles.buttonText} onPress={this.onUpdatePressed}>UPDATE</Text>
+                    </TouchableHighlight>
+               
                </View> 
             </View>
         )
@@ -59,4 +66,17 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:"space-between",
     },
+    buttonText:{
+        fontWeight:"bold",
+        color:"#ffffff",
+      },
+      bottonContainer:{     
+          padding:10, 
+        backgroundColor:"#30728E",     
+        marginTop:1,
+        justifyContent:"center",
+        alignItems:"center",      
+        height:HEIGHT/18
+    
+      }
 })

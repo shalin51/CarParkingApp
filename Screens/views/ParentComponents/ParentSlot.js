@@ -13,14 +13,17 @@ export default class ParentSlot extends Component{
     constructor(props){
         super(props)
 
+
+        
+
         this.onRoutePressed=function(){
             Alert.alert('Route')
         }.bind(this);
 
         parentSlot={
-                parentId:'D',
-                availableSlots:'10',
-                avaragePrice:'10',
+                parentId:this.props.parentId,
+                availableSlots:this.props.availableSlots,
+                avaragePrice:this.props.avaragePrice,
         }
 }
 
@@ -28,12 +31,12 @@ export default class ParentSlot extends Component{
         return(
             <View style={{
                 borderRadius: 10,
-                backgroundColor: '#008080',
+                backgroundColor: '#30728E',
             }
             }>  
                     <Text style={styles.buttonText}>{parentSlot.parentId}</Text>
                     <Text style={styles.button}>Available Slots: {parentSlot.availableSlots}</Text>
-                    <Text style={styles.button}>Avarage price: {parentSlot.avaragePrice}$</Text>
+                    <Text style={styles.button}>Avarage price: {parentSlot.avaragePrice}</Text>
             </View>  
         )
     }

@@ -29,17 +29,17 @@ export default class ParentSlotsView extends Component{
         <View style={styles.container}>
             <TouchableHighlight style={styles.touchStyle} onPress={()=>onSlotPress('D')}>
                 <View>
-                    <ParentSlot />
+                    <ParentSlot parentId={"D"} availableSlots={"12"} avaragePrice={"$17"}/>
                 </View>           
             </TouchableHighlight>
-            <TouchableHighlight style={styles.touchStyle} onPress={()=>onSlotPress('D')}>
+            <TouchableHighlight style={styles.touchStyle} onPress={()=>onSlotPress('E')}>
                 <View>
-                    <ParentSlot />
+                    <ParentSlot parentId={"E"}  availableSlots={"15"} avaragePrice={"$12"}/>
                 </View>      
             </TouchableHighlight>
-            <TouchableHighlight style={styles.touchStyle} onPress={()=>onSlotPress('D')}>
+            <TouchableHighlight style={styles.touchStyle} onPress={()=>onSlotPress('F')}>
                 <View>
-                    <ParentSlot />
+                    <ParentSlot parentId={"F"} availableSlots={"19"} avaragePrice={"$13"}/>
                 </View>      
             </TouchableHighlight>
         </View>

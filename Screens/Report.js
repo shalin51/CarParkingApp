@@ -33,7 +33,12 @@ export default class ReportScreen extends Component{
     render(){
         const CameraButton=()=>{
             if(this.state.component=="Button")
-                return  <Button style={{width:30,}} title='Not You??!!!' onPress={this.onReportHandler}/> 
+        return  (
+                <View> 
+                    <Text style={styles.text}>Has someone parked in your slot? Report it by capturing car's number plate</Text>
+                    <Button style={{width:30,}} title='Report!' onPress={this.onReportHandler}/> 
+                </View>
+                )
             else
                 return(
                     <MyCamera/>
@@ -42,7 +47,8 @@ export default class ReportScreen extends Component{
         }
 
         return( 
-        <View style={styles.container}>    
+        <View style={styles.container}>  
+             
           <CameraButton/>
         </View>)
        
@@ -53,19 +59,22 @@ export default class ReportScreen extends Component{
 const styles=StyleSheet.create({
     container:{
         flex:1,
-        paddingTop:20,
-        margin:30,
-        backgroundColor:"#adf567",
+        backgroundColor:"#ffffff",
     },
     button:{
         paddingTop:22,
         margin:20,
         width:50,
     },
+    text:{
+       padding:20,
+        fontWeight:"bold"
+       
+    },
     preview: {
         flex: 1,
         justifyContent: 'flex-end',
-        alignItems: 'center'
+        alignItems: 'center',
       },
       capture: {
         flex: 0,
